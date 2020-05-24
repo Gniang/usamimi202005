@@ -1,0 +1,54 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>ZawaZawa</title>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="stylesheet" href="">
+<link rel="stylesheet" type="text/css" href="./base.css">
+</head>
+    <body>
+    <!-- <input type="file" accept="audio/*" capture="microphone" id="recorder">
+    <audio id="player" controls></audio>
+
+
+    <script>
+    var recorder = document.getElementById('recorder');
+    var player = document.getElementById('player');
+
+    recorder.addEventListener('change', function(e) {
+        var file = e.target.files[0]; 
+        // Do something with the audio file.
+        player.src =  URL.createObjectURL(file);
+    });
+    </script> -->
+
+
+
+    <audio id="player" controls></audio>
+    <script>  
+    var player = document.getElementById('player');
+
+    var handleSuccess = function(stream) {
+        player.srcObject = stream;
+
+        var context = new AudioContext();
+        var input = context.createMediaStreamSource(stream)
+        var processor = context.createScriptProcessor(1024,1,1);
+
+        source.connect(processor);
+        processor.connect(context.destination);
+
+        processor.onaudioprocess = function(e){
+        // Do something with the data, i.e Convert this to WAV
+        console.log(e.inputBuffer);
+    };
+
+    navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+        .then(handleSuccess)
+    </script>
+</body>
